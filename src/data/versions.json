@@ -1,0 +1,12 @@
+[
+  {
+    "version": "UE5.7",
+    "target": true,
+    "notes": ["MVP content targets UE5.7 terminology and current material-learning workflows.", "Examples intentionally explain concepts before engine parity details."],
+    "substrateNotes": ["Substrate changes how users think about surface composition, but MVP telegraph recipes focus on mask and parameter logic first."],
+    "materialAttributeNotes": ["Material Attributes are treated as an advanced workflow note, not the first teaching path."],
+    "deprecatedWorkflows": ["Avoid presenting older screenshots or legacy-only outputs as the default workflow."],
+    "recommendedAlternatives": ["Teach reusable modules and named parameters before exposing advanced material architecture."],
+    "migrationTips": ["When following older tutorials, identify the concept first: mask, parameter, blend, or animation. Then map the concept to the current UE5.7 workflow."]
+  }
+]

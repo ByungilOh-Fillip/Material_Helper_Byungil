@@ -1,0 +1,69 @@
+[
+  {
+    "id": "circle-telegraph",
+    "name": "Circle Telegraph Module",
+    "goal": "Turn coordinates, radius, edge width, and fade into a readable circular warning mask.",
+    "contains": ["VectorParameter", "ScalarParameter", "SphereMask", "Multiply", "Lerp"],
+    "parameters": [
+      {
+        "id": "radius",
+        "name": "Radius",
+        "type": "scalar",
+        "min": 0.05,
+        "max": 0.95,
+        "default": 0.45,
+        "description": "Controls how large the telegraph area is."
+      },
+      {
+        "id": "edge",
+        "name": "Edge Width",
+        "type": "scalar",
+        "min": 0.01,
+        "max": 0.35,
+        "default": 0.09,
+        "description": "Controls softness and ring thickness."
+      },
+      {
+        "id": "fade",
+        "name": "Fade",
+        "type": "scalar",
+        "min": 0,
+        "max": 1,
+        "default": 0.82,
+        "description": "Controls final warning visibility."
+      }
+    ],
+    "internalStructure": ["Coordinates feed SphereMask A.", "Center parameter feeds SphereMask B.", "Radius and Edge Width shape the mask.", "Fade multiplies final mask visibility.", "Lerp blends ground color to warning color."],
+    "inspectNotes": ["SphereMask creates the educational core.", "Multiply demonstrates how parameters control intensity.", "Lerp shows how a mask becomes a visible effect."],
+    "recommendedEffects": ["Circular Telegraph", "Boss Warning Indicator"]
+  },
+  {
+    "id": "pulse",
+    "name": "Pulse Module",
+    "goal": "Convert Time into a controllable repeating intensity value.",
+    "contains": ["Time", "Multiply", "Sine", "Add", "Multiply"],
+    "parameters": [
+      {
+        "id": "speed",
+        "name": "Speed",
+        "type": "scalar",
+        "min": 0.1,
+        "max": 5,
+        "default": 1.3,
+        "description": "Controls how quickly the pulse repeats."
+      },
+      {
+        "id": "intensity",
+        "name": "Intensity",
+        "type": "scalar",
+        "min": 0,
+        "max": 1,
+        "default": 0.7,
+        "description": "Controls how strongly the pulse affects the result."
+      }
+    ],
+    "internalStructure": ["Time is multiplied by Speed.", "Sine turns time into oscillation.", "Add and Multiply remap from -1..1 into 0..1.", "Intensity scales the final pulse."],
+    "inspectNotes": ["The important lesson is remapping Sine output before using it as a mask.", "Debug mode should show negative Sine values before remap."],
+    "recommendedEffects": ["Pulse Effect", "Circular Telegraph"]
+  }
+]
