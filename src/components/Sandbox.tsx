@@ -85,7 +85,7 @@ export function Sandbox({
 
   // Connection validation: prevent invalid wiring
   const isValidConnection = useCallback(
-    (connection: Connection) => {
+    (connection: any) => {
       // 1. No self-loops
       if (connection.source === connection.target) return false;
 
