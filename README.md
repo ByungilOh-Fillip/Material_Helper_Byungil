@@ -44,44 +44,5 @@
 
 ---
 
-## 💻 로컬 실행 방법 (Local Installation)
-
-1. **저장소 클론 및 폴더 이동**
-   ```bash
-   git clone <repository-url>
-   cd Material_Helper_Byungil
-   ```
-
-2. **의존성 라이브러리 설치**
-   ```bash
-   npm install
-   ```
-
-3. **개발 서버 실행**
-   ```bash
-   npm run dev
-   ```
-   * 실행 후 브라우저에서 `http://localhost:5173` 으로 접속합니다.
-
-4. **프로덕션 빌드**
-   ```bash
-   npm run build
-   ```
-
----
-
-## 🌐 GitHub Pages 배포 설정 (GitHub Pages Deploy)
-
-본 프로젝트는 GitHub Actions를 통해 자동으로 배포되도록 구성되어 있습니다.
-
-1. `vite.config.ts` 파일을 열어 `base` 항목을 본인의 레포지토리 이름으로 수정합니다.
-   ```typescript
-   base: "/Material_Helper_Byungil/"
-   ```
-2. GitHub Repository **Settings** -> **Pages** 메뉴에서 **Source**를 **`GitHub Actions`**로 설정합니다.
-3. 코드를 `main` 브랜치에 푸시하면 자동으로 배포 워크플로우가 트리거됩니다.
-
----
-
 ## 📄 라이선스 (License)
 This project is licensed under the MIT License.
