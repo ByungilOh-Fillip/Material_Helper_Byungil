@@ -269,6 +269,63 @@ export function evaluateGraph(
         break;
       }
 
+      case "ComponentMask": {
+        const input = evalInput("Input", [0, 0, 0, 0]);
+        // Default to extracting R (X) if no specific channel is set in values
+        // For simplicity in this sandbox, we'll assume values.channel could be 'R', 'G', 'B', 'A'
+        // Let's implement R and G masks based on label or values.
+        let channelIndex = 0; // R
+        if (values.maskR) channelIndex = 0;
+        else if (values.maskG) channelIndex = 1;
+        else if (values.maskB) channelIndex = 2;
+        else if (values.maskA) channelIndex = 3;
+        // Fallback for simple names
+        else if (node.data?.label?.includes("( G )")) channelIndex = 1;
+        
+        result = broadcast(input[channelIndex]);
+        break;
+      }
+
+      case "OneMinus": {
+        const input = evalInput("Input", [0, 0, 0, 0]);
+        result = [1.0 - input[0], 1.0 - input[1], 1.0 - input[2], 1.0 - input[3]];
+        break;
+      }
+
+      case "Step": {
+        const yVal = evalInput("Y", [0, 0, 0, 0]); // Threshold
+        const xVal = evalInput("X", [0, 0, 0, 0]); // Value to test
+        result = [
+          xVal[0] >= yVal[0] ? 1 : 0,
+          xVal[1] >= yVal[1] ? 1 : 0,
+          xVal[2] >= yVal[2] ? 1 : 0,
+          xVal[3] >= yVal[3] ? 1 : 0
+        ];
+        break;
+      }
+
+      case "RadialGradientExponential": {
+        const coord = evalInput("UVs", [x, y, 0, 1]);
+        const center = evalInput("CenterPosition", [0.5, 0.5, 0, 1]);
+        const radius = evalInput("Radius", [0.5, 0.5, 0.5, 0.5])[0];
+        const density = evalInput("Density", [2.0, 2.0, 2.0, 2.0])[0];
+        const invert = evalInput("Invert Density", [0, 0, 0, 0])[0]; // Boolean flag roughly
+
+        const dx = coord[0] - center[0];
+        const dy = coord[1] - center[1];
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // UE5 formula: saturate(1 - pow(distance / radius, density))
+        const normalizedDist = distance / Math.max(radius, 0.001);
+        let grad = 1.0 - Math.pow(normalizedDist, density);
+        grad = clamp(grad);
+        
+        if (invert > 0.5) grad = 1.0 - grad;
+        
+        result = broadcast(grad);
+        break;
+      }
+
       case "FinalColor":
         result = evalInput("Color", [0, 0, 0, 1]);
         // Also fallback to check expanded material result pins if EmissiveColor is wired

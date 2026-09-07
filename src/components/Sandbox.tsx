@@ -44,6 +44,10 @@ const NODE_TEMPLATES = [
   { nodeType: "SphereMask", label: "Sphere Mask", inputs: ["A", "B", "Radius", "Hardness"], outputs: ["Result"], defaultValues: {} },
   { nodeType: "BoxMask", label: "Box Mask", inputs: ["A", "B", "Width", "Height", "Hardness"], outputs: ["Result"], defaultValues: {} },
   { nodeType: "ConeMask", label: "Cone Mask", inputs: ["A", "B", "Radius", "Angle"], outputs: ["Result"], defaultValues: {} },
+  { nodeType: "ComponentMask", label: "Component Mask", inputs: ["Input"], outputs: ["Masked Value"], defaultValues: { maskR: true } },
+  { nodeType: "OneMinus", label: "OneMinus", inputs: ["Input"], outputs: ["1 - Input"], defaultValues: {} },
+  { nodeType: "Step", label: "Step", inputs: ["Y", "X"], outputs: ["0 or 1"], defaultValues: {} },
+  { nodeType: "RadialGradientExponential", label: "Radial Gradient Exponential", inputs: ["UVs", "CenterPosition", "Radius", "Density", "Invert Density"], outputs: ["Gradient"], defaultValues: {} },
   { nodeType: "FinalColor", label: "Material Result", inputs: ["BaseColor", "Metallic", "Roughness", "EmissiveColor", "Normal"], outputs: [], defaultValues: {} }
 ];
 

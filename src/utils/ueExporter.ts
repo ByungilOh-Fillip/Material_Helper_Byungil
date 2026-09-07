@@ -127,6 +127,15 @@ export function exportGraphToT3D(nodes: any[], edges: any[]): string {
       const b = (parseInt(clean.substring(4, 6), 16) / 255 || 0).toFixed(6);
       t3d += `      ParameterName="${pName}"\n`;
       t3d += `      DefaultValue=(R=${r},G=${g},B=${b},A=1.000000)\n`;
+    } else if (ueClass === "MaterialExpressionComponentMask") {
+      const r = values.maskR ? "True" : "False";
+      const g = values.maskG ? "True" : "False";
+      const b = values.maskB ? "True" : "False";
+      const a = values.maskA ? "True" : "False";
+      t3d += `      R=${r}\n`;
+      t3d += `      G=${g}\n`;
+      t3d += `      B=${b}\n`;
+      t3d += `      A=${a}\n`;
     }
 
     // Expression-level connections: A=(Expression=Class'"ExprName"')
@@ -207,6 +216,10 @@ function resolveUEClass(nodeType: string): string {
     case "SphereMask":       return "MaterialExpressionSphereMask";
     case "BoxMask":          return "MaterialExpressionBoxMask2D";
     case "ConeMask":         return "MaterialExpressionConeMask";
+    case "ComponentMask":    return "MaterialExpressionComponentMask";
+    case "OneMinus":         return "MaterialExpressionOneMinus";
+    case "Step":             return "MaterialExpressionStep";
+    case "RadialGradientExponential": return "MaterialExpressionRadialGradientExponential";
     case "FinalColor":       return "MaterialExpressionMultiply";
     default:                 return "MaterialExpressionAdd";
   }

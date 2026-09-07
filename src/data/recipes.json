@@ -6,7 +6,12 @@
     "moduleName": "circlemask",
     "goal": "Generate a circular shape using texture coordinates and SphereMask.",
     "finalVisualResult": "A white circular mask on a black background.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "SphereMask", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "SphereMask",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord provides UV coordinates to SphereMask input A.",
       "ScalarParameters define the Center, Radius, and Hardness.",
@@ -40,24 +45,147 @@
     "expectedBehavior": "Radius scales the circle size; Hardness sharpens or softens the edges.",
     "motionPreview": "Solid white circle on a black background.",
     "colorPreview": "Solid white circle on a black background.",
-    "debugInformation": ["SphereMask output", "Radius", "Hardness"],
+    "debugInformation": [
+      "SphereMask output",
+      "Radius",
+      "Hardness"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Opaque"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 150 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_radius", "type": "customNode", "position": { "x": 50, "y": 280 }, "data": { "label": "Radius", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Radius", "value": 0.4, "min": 0.05, "max": 0.95 } } },
-        { "id": "n_hardness", "type": "customNode", "position": { "x": 50, "y": 400 }, "data": { "label": "Hardness", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Hardness", "value": 0.9, "min": 0, "max": 1 } } },
-        { "id": "n_smask", "type": "customNode", "position": { "x": 320, "y": 180 }, "data": { "label": "SphereMask", "nodeType": "SphereMask", "inputs": ["A", "B", "Radius", "Hardness"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 550, "y": 200 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["Color"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_radius",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 280
+          },
+          "data": {
+            "label": "Radius",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Radius",
+              "value": 0.4,
+              "min": 0.05,
+              "max": 0.95
+            }
+          }
+        },
+        {
+          "id": "n_hardness",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 400
+          },
+          "data": {
+            "label": "Hardness",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Hardness",
+              "value": 0.9,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_smask",
+          "type": "customNode",
+          "position": {
+            "x": 320,
+            "y": 180
+          },
+          "data": {
+            "label": "SphereMask",
+            "nodeType": "SphereMask",
+            "inputs": [
+              "A",
+              "B",
+              "Radius",
+              "Hardness"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 550,
+            "y": 200
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "Color"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_smask", "targetHandle": "A" },
-        { "id": "e2", "source": "n_radius", "sourceHandle": "Float", "target": "n_smask", "targetHandle": "Radius" },
-        { "id": "e3", "source": "n_hardness", "sourceHandle": "Float", "target": "n_smask", "targetHandle": "Hardness" },
-        { "id": "e4", "source": "n_smask", "sourceHandle": "Result", "target": "n_out", "targetHandle": "Color" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_smask",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_radius",
+          "sourceHandle": "Float",
+          "target": "n_smask",
+          "targetHandle": "Radius"
+        },
+        {
+          "id": "e3",
+          "source": "n_hardness",
+          "sourceHandle": "Float",
+          "target": "n_smask",
+          "targetHandle": "Hardness"
+        },
+        {
+          "id": "e4",
+          "source": "n_smask",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "Color"
+        }
       ]
     }
   },
@@ -68,7 +196,12 @@
     "moduleName": "basemask",
     "goal": "Vary mask size dynamically using a ScalarParameter scaling texture coordinates.",
     "finalVisualResult": "A size-modulated gradient mask.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "Multiply", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "Multiply",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord feeds Multiply.",
       "ScalarParameter scales coordinates, altering texture tiling/scale.",
@@ -91,22 +224,114 @@
     "expectedBehavior": "Higher scale tiling values shrink the visual output, while lower values enlarge it.",
     "motionPreview": "Stretched coordinate gradient.",
     "colorPreview": "Color scale distribution.",
-    "debugInformation": ["UV scale output"],
+    "debugInformation": [
+      "UV scale output"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Opaque"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 150 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_scale", "type": "customNode", "position": { "x": 50, "y": 280 }, "data": { "label": "Scale", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Scale", "value": 1.5, "min": 0.1, "max": 5 } } },
-        { "id": "n_mult", "type": "customNode", "position": { "x": 300, "y": 180 }, "data": { "label": "Multiply", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 500, "y": 200 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["Color"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_scale",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 280
+          },
+          "data": {
+            "label": "Scale",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Scale",
+              "value": 1.5,
+              "min": 0.1,
+              "max": 5
+            }
+          }
+        },
+        {
+          "id": "n_mult",
+          "type": "customNode",
+          "position": {
+            "x": 300,
+            "y": 180
+          },
+          "data": {
+            "label": "Multiply",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 500,
+            "y": 200
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "Color"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_mult", "targetHandle": "A" },
-        { "id": "e2", "source": "n_scale", "sourceHandle": "Float", "target": "n_mult", "targetHandle": "B" },
-        { "id": "e3", "source": "n_mult", "sourceHandle": "Result", "target": "n_out", "targetHandle": "Color" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_mult",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_scale",
+          "sourceHandle": "Float",
+          "target": "n_mult",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e3",
+          "source": "n_mult",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "Color"
+        }
       ]
     }
   },
@@ -117,7 +342,12 @@
     "moduleName": "fillmask",
     "goal": "Blend vector color and scalar mask to colorize shape output.",
     "finalVisualResult": "A solid color shape on a background.",
-    "requiredNodes": ["VectorParameter", "ScalarParameter", "Multiply", "FinalColor"],
+    "requiredNodes": [
+      "VectorParameter",
+      "ScalarParameter",
+      "Multiply",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "VectorParameter feeds A of Multiply.",
       "ScalarParameter/Mask feeds B of Multiply.",
@@ -137,7 +367,7 @@
         "type": "scalar",
         "min": 0,
         "max": 1,
-        "default": 1.0,
+        "default": 1,
         "description": "Global fade factor."
       }
     ],
@@ -147,22 +377,118 @@
     "expectedBehavior": "Output color matches VectorParameter multiplied by Fade scalar.",
     "motionPreview": "Grayscale brightness.",
     "colorPreview": "Solid tinted output.",
-    "debugInformation": ["Color vector", "Fade value"],
+    "debugInformation": [
+      "Color vector",
+      "Fade value"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Translucent"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_color", "type": "customNode", "position": { "x": 50, "y": 120 }, "data": { "label": "Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Color", "color": "#00ffcc" } } },
-        { "id": "n_fade", "type": "customNode", "position": { "x": 50, "y": 250 }, "data": { "label": "Fade", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Fade", "value": 1.0, "min": 0, "max": 1 } } },
-        { "id": "n_mult", "type": "customNode", "position": { "x": 280, "y": 180 }, "data": { "label": "Multiply", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 480, "y": 200 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["Color"], "outputs": [], "values": {} } }
+        {
+          "id": "n_color",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 120
+          },
+          "data": {
+            "label": "Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Color",
+              "color": "#00ffcc"
+            }
+          }
+        },
+        {
+          "id": "n_fade",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 250
+          },
+          "data": {
+            "label": "Fade",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Fade",
+              "value": 1,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_mult",
+          "type": "customNode",
+          "position": {
+            "x": 280,
+            "y": 180
+          },
+          "data": {
+            "label": "Multiply",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 480,
+            "y": 200
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "Color"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_color", "sourceHandle": "Color", "target": "n_mult", "targetHandle": "A" },
-        { "id": "e2", "source": "n_fade", "sourceHandle": "Float", "target": "n_mult", "targetHandle": "B" },
-        { "id": "e3", "source": "n_mult", "sourceHandle": "Result", "target": "n_out", "targetHandle": "Color" }
+        {
+          "id": "e1",
+          "source": "n_color",
+          "sourceHandle": "Color",
+          "target": "n_mult",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_fade",
+          "sourceHandle": "Float",
+          "target": "n_mult",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e3",
+          "source": "n_mult",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "Color"
+        }
       ]
     }
   },
@@ -173,7 +499,14 @@
     "moduleName": "pulse",
     "goal": "Animate brightness periodically over time using Sine.",
     "finalVisualResult": "A continuously pulsating light that fades in and out.",
-    "requiredNodes": ["Time", "ScalarParameter", "Multiply", "Sine", "Add", "FinalColor"],
+    "requiredNodes": [
+      "Time",
+      "ScalarParameter",
+      "Multiply",
+      "Sine",
+      "Add",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "Time is multiplied by Speed.",
       "Sine maps input to a -1..1 oscillation range.",
@@ -185,7 +518,7 @@
         "name": "Speed",
         "type": "scalar",
         "min": 0.1,
-        "max": 5.0,
+        "max": 5,
         "default": 1.5,
         "description": "Pulse frequency."
       },
@@ -206,31 +539,249 @@
     "expectedBehavior": "Higher speed increases pulse rate; Intensity changes wave depth.",
     "motionPreview": "Pulsating grayscale wave.",
     "colorPreview": "Pulsating brightness color.",
-    "debugInformation": ["Sine Output", "Remapped Value"],
+    "debugInformation": [
+      "Sine Output",
+      "Remapped Value"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Opaque"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_time", "type": "customNode", "position": { "x": 50, "y": 100 }, "data": { "label": "Time", "nodeType": "Time", "inputs": [], "outputs": ["Time"], "values": {} } },
-        { "id": "n_speed", "type": "customNode", "position": { "x": 50, "y": 220 }, "data": { "label": "Speed", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Speed", "value": 1.5, "min": 0.1, "max": 5.0 } } },
-        { "id": "n_mult", "type": "customNode", "position": { "x": 260, "y": 150 }, "data": { "label": "Multiply", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_sine", "type": "customNode", "position": { "x": 420, "y": 150 }, "data": { "label": "Sine", "nodeType": "Sine", "inputs": ["Value"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_intensity", "type": "customNode", "position": { "x": 260, "y": 300 }, "data": { "label": "Intensity", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Intensity", "value": 0.6, "min": 0, "max": 1 } } },
-        { "id": "n_lerp", "type": "customNode", "position": { "x": 600, "y": 200 }, "data": { "label": "Lerp (Remap)", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_min", "type": "customNode", "position": { "x": 420, "y": 300 }, "data": { "label": "Min Val (0.4)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Min Val", "value": 0.4, "min": 0, "max": 1 } } },
-        { "id": "n_max", "type": "customNode", "position": { "x": 420, "y": 410 }, "data": { "label": "Max Val (1.0)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Max Val", "value": 1.0, "min": 0, "max": 1 } } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 780, "y": 220 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["Color"], "outputs": [], "values": {} } }
+        {
+          "id": "n_time",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 100
+          },
+          "data": {
+            "label": "Time",
+            "nodeType": "Time",
+            "inputs": [],
+            "outputs": [
+              "Time"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_speed",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 220
+          },
+          "data": {
+            "label": "Speed",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Speed",
+              "value": 1.5,
+              "min": 0.1,
+              "max": 5
+            }
+          }
+        },
+        {
+          "id": "n_mult",
+          "type": "customNode",
+          "position": {
+            "x": 260,
+            "y": 150
+          },
+          "data": {
+            "label": "Multiply",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_sine",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 150
+          },
+          "data": {
+            "label": "Sine",
+            "nodeType": "Sine",
+            "inputs": [
+              "Value"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_intensity",
+          "type": "customNode",
+          "position": {
+            "x": 260,
+            "y": 300
+          },
+          "data": {
+            "label": "Intensity",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Intensity",
+              "value": 0.6,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_lerp",
+          "type": "customNode",
+          "position": {
+            "x": 600,
+            "y": 200
+          },
+          "data": {
+            "label": "Lerp (Remap)",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_min",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 300
+          },
+          "data": {
+            "label": "Min Val (0.4)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Min Val",
+              "value": 0.4,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_max",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 410
+          },
+          "data": {
+            "label": "Max Val (1.0)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Max Val",
+              "value": 1,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 780,
+            "y": 220
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "Color"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_time", "sourceHandle": "Time", "target": "n_mult", "targetHandle": "A" },
-        { "id": "e2", "source": "n_speed", "sourceHandle": "Float", "target": "n_mult", "targetHandle": "B" },
-        { "id": "e3", "source": "n_mult", "sourceHandle": "Result", "target": "n_sine", "targetHandle": "Value" },
-        { "id": "e4", "source": "n_sine", "sourceHandle": "Result", "target": "n_lerp", "targetHandle": "Alpha" },
-        { "id": "e5", "source": "n_min", "sourceHandle": "Float", "target": "n_lerp", "targetHandle": "A" },
-        { "id": "e6", "source": "n_max", "sourceHandle": "Float", "target": "n_lerp", "targetHandle": "B" },
-        { "id": "e7", "source": "n_lerp", "sourceHandle": "Result", "target": "n_out", "targetHandle": "Color" }
+        {
+          "id": "e1",
+          "source": "n_time",
+          "sourceHandle": "Time",
+          "target": "n_mult",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_speed",
+          "sourceHandle": "Float",
+          "target": "n_mult",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e3",
+          "source": "n_mult",
+          "sourceHandle": "Result",
+          "target": "n_sine",
+          "targetHandle": "Value"
+        },
+        {
+          "id": "e4",
+          "source": "n_sine",
+          "sourceHandle": "Result",
+          "target": "n_lerp",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e5",
+          "source": "n_min",
+          "sourceHandle": "Float",
+          "target": "n_lerp",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e6",
+          "source": "n_max",
+          "sourceHandle": "Float",
+          "target": "n_lerp",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e7",
+          "source": "n_lerp",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "Color"
+        }
       ]
     }
   },
@@ -241,7 +792,16 @@
     "moduleName": "circular-telegraph",
     "goal": "Assemble an animated circular indicator that combines coordinate masks, time pulsing, and linear interpolation.",
     "finalVisualResult": "A warning circle with a soft edge, pulsing in size and brightness in red-orange.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "SphereMask", "Time", "Sine", "Multiply", "Lerp", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "SphereMask",
+      "Time",
+      "Sine",
+      "Multiply",
+      "Lerp",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord feeds SphereMask coordinate A.",
       "ScalarParameters shape Radius, Edge softness, Fade.",
@@ -273,7 +833,7 @@
         "name": "Pulse Speed",
         "type": "scalar",
         "min": 0.1,
-        "max": 5.0,
+        "max": 5,
         "default": 1.3,
         "description": "Pulsating frequency."
       }
@@ -284,46 +844,448 @@
     "expectedBehavior": "A pulsing soft-edged glowing disk on a dark background.",
     "motionPreview": "Pulsing circular mask.",
     "colorPreview": "Red warning circular disk pulsing.",
-    "debugInformation": ["SphereMask output", "Pulse value", "Final lerped color"],
+    "debugInformation": [
+      "SphereMask output",
+      "Pulse value",
+      "Final lerped color"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Translucent"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 100 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_radius", "type": "customNode", "position": { "x": 50, "y": 210 }, "data": { "label": "Radius", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Radius", "value": 0.45, "min": 0.05, "max": 0.95 } } },
-        { "id": "n_edge", "type": "customNode", "position": { "x": 50, "y": 320 }, "data": { "label": "Edge Softness", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Edge Softness", "value": 0.09, "min": 0.01, "max": 0.35 } } },
-        { "id": "n_smask", "type": "customNode", "position": { "x": 280, "y": 150 }, "data": { "label": "SphereMask", "nodeType": "SphereMask", "inputs": ["A", "B", "Radius", "Hardness"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_time", "type": "customNode", "position": { "x": 50, "y": 450 }, "data": { "label": "Time", "nodeType": "Time", "inputs": [], "outputs": ["Time"], "values": {} } },
-        { "id": "n_speed", "type": "customNode", "position": { "x": 50, "y": 560 }, "data": { "label": "Pulse Speed", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Speed", "value": 1.3, "min": 0.1, "max": 5.0 } } },
-        { "id": "n_tmult", "type": "customNode", "position": { "x": 260, "y": 490 }, "data": { "label": "Multiply Speed", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_sine", "type": "customNode", "position": { "x": 420, "y": 490 }, "data": { "label": "Sine", "nodeType": "Sine", "inputs": ["Value"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_pulse_lerp", "type": "customNode", "position": { "x": 560, "y": 450 }, "data": { "label": "Pulse Remap", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_pulse_min", "type": "customNode", "position": { "x": 420, "y": 600 }, "data": { "label": "Pulse Min (0.3)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Min", "value": 0.3, "min": 0, "max": 1 } } },
-        { "id": "n_pulse_max", "type": "customNode", "position": { "x": 420, "y": 710 }, "data": { "label": "Pulse Max (1.0)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Max", "value": 1.0, "min": 0, "max": 1 } } },
-        { "id": "n_combine", "type": "customNode", "position": { "x": 750, "y": 280 }, "data": { "label": "Multiply Mask", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_warn_col", "type": "customNode", "position": { "x": 750, "y": 100 }, "data": { "label": "Warn Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Warn Color", "color": "#ff3000" } } },
-        { "id": "n_floor_col", "type": "customNode", "position": { "x": 750, "y": -10 }, "data": { "label": "Floor Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Floor Color", "color": "#2a3037" } } },
-        { "id": "n_lerp_color", "type": "customNode", "position": { "x": 960, "y": 120 }, "data": { "label": "Lerp Color", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 1150, "y": 150 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["Color"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 100
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_radius",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 210
+          },
+          "data": {
+            "label": "Radius",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Radius",
+              "value": 0.45,
+              "min": 0.05,
+              "max": 0.95
+            }
+          }
+        },
+        {
+          "id": "n_edge",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 320
+          },
+          "data": {
+            "label": "Edge Softness",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Edge Softness",
+              "value": 0.09,
+              "min": 0.01,
+              "max": 0.35
+            }
+          }
+        },
+        {
+          "id": "n_smask",
+          "type": "customNode",
+          "position": {
+            "x": 280,
+            "y": 150
+          },
+          "data": {
+            "label": "SphereMask",
+            "nodeType": "SphereMask",
+            "inputs": [
+              "A",
+              "B",
+              "Radius",
+              "Hardness"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_time",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 450
+          },
+          "data": {
+            "label": "Time",
+            "nodeType": "Time",
+            "inputs": [],
+            "outputs": [
+              "Time"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_speed",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 560
+          },
+          "data": {
+            "label": "Pulse Speed",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Speed",
+              "value": 1.3,
+              "min": 0.1,
+              "max": 5
+            }
+          }
+        },
+        {
+          "id": "n_tmult",
+          "type": "customNode",
+          "position": {
+            "x": 260,
+            "y": 490
+          },
+          "data": {
+            "label": "Multiply Speed",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_sine",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 490
+          },
+          "data": {
+            "label": "Sine",
+            "nodeType": "Sine",
+            "inputs": [
+              "Value"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_pulse_lerp",
+          "type": "customNode",
+          "position": {
+            "x": 560,
+            "y": 450
+          },
+          "data": {
+            "label": "Pulse Remap",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_pulse_min",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 600
+          },
+          "data": {
+            "label": "Pulse Min (0.3)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Min",
+              "value": 0.3,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_pulse_max",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 710
+          },
+          "data": {
+            "label": "Pulse Max (1.0)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Max",
+              "value": 1,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_combine",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 280
+          },
+          "data": {
+            "label": "Multiply Mask",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_warn_col",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 100
+          },
+          "data": {
+            "label": "Warn Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Warn Color",
+              "color": "#ff3000"
+            }
+          }
+        },
+        {
+          "id": "n_floor_col",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": -10
+          },
+          "data": {
+            "label": "Floor Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Floor Color",
+              "color": "#2a3037"
+            }
+          }
+        },
+        {
+          "id": "n_lerp_color",
+          "type": "customNode",
+          "position": {
+            "x": 960,
+            "y": 120
+          },
+          "data": {
+            "label": "Lerp Color",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 1150,
+            "y": 150
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "Color"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_smask", "targetHandle": "A" },
-        { "id": "e2", "source": "n_radius", "sourceHandle": "Float", "target": "n_smask", "targetHandle": "Radius" },
-        { "id": "e3", "source": "n_edge", "sourceHandle": "Float", "target": "n_smask", "targetHandle": "Hardness" },
-        { "id": "e4", "source": "n_time", "sourceHandle": "Time", "target": "n_tmult", "targetHandle": "A" },
-        { "id": "e5", "source": "n_speed", "sourceHandle": "Float", "target": "n_tmult", "targetHandle": "B" },
-        { "id": "e6", "source": "n_tmult", "sourceHandle": "Result", "target": "n_sine", "targetHandle": "Value" },
-        { "id": "e7", "source": "n_sine", "sourceHandle": "Result", "target": "n_pulse_lerp", "targetHandle": "Alpha" },
-        { "id": "e8", "source": "n_pulse_min", "sourceHandle": "Float", "target": "n_pulse_lerp", "targetHandle": "A" },
-        { "id": "e9", "source": "n_pulse_max", "sourceHandle": "Float", "target": "n_pulse_lerp", "targetHandle": "B" },
-        { "id": "e10", "source": "n_smask", "sourceHandle": "Result", "target": "n_combine", "targetHandle": "A" },
-        { "id": "e11", "source": "n_pulse_lerp", "sourceHandle": "Result", "target": "n_combine", "targetHandle": "B" },
-        { "id": "e12", "source": "n_floor_col", "sourceHandle": "Color", "target": "n_lerp_color", "targetHandle": "A" },
-        { "id": "e13", "source": "n_warn_col", "sourceHandle": "Color", "target": "n_lerp_color", "targetHandle": "B" },
-        { "id": "e14", "source": "n_combine", "sourceHandle": "Result", "target": "n_lerp_color", "targetHandle": "Alpha" },
-        { "id": "e15", "source": "n_lerp_color", "sourceHandle": "Result", "target": "n_out", "targetHandle": "Color" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_smask",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_radius",
+          "sourceHandle": "Float",
+          "target": "n_smask",
+          "targetHandle": "Radius"
+        },
+        {
+          "id": "e3",
+          "source": "n_edge",
+          "sourceHandle": "Float",
+          "target": "n_smask",
+          "targetHandle": "Hardness"
+        },
+        {
+          "id": "e4",
+          "source": "n_time",
+          "sourceHandle": "Time",
+          "target": "n_tmult",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e5",
+          "source": "n_speed",
+          "sourceHandle": "Float",
+          "target": "n_tmult",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e6",
+          "source": "n_tmult",
+          "sourceHandle": "Result",
+          "target": "n_sine",
+          "targetHandle": "Value"
+        },
+        {
+          "id": "e7",
+          "source": "n_sine",
+          "sourceHandle": "Result",
+          "target": "n_pulse_lerp",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e8",
+          "source": "n_pulse_min",
+          "sourceHandle": "Float",
+          "target": "n_pulse_lerp",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e9",
+          "source": "n_pulse_max",
+          "sourceHandle": "Float",
+          "target": "n_pulse_lerp",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e10",
+          "source": "n_smask",
+          "sourceHandle": "Result",
+          "target": "n_combine",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e11",
+          "source": "n_pulse_lerp",
+          "sourceHandle": "Result",
+          "target": "n_combine",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e12",
+          "source": "n_floor_col",
+          "sourceHandle": "Color",
+          "target": "n_lerp_color",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e13",
+          "source": "n_warn_col",
+          "sourceHandle": "Color",
+          "target": "n_lerp_color",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e14",
+          "source": "n_combine",
+          "sourceHandle": "Result",
+          "target": "n_lerp_color",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e15",
+          "source": "n_lerp_color",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "Color"
+        }
       ]
     }
   },
@@ -334,7 +1296,12 @@
     "moduleName": "boxmask",
     "goal": "Generate a rectangular box shape using texture coordinates and a BoxMask node.",
     "finalVisualResult": "A white rectangular box mask on a black background.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "BoxMask", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "BoxMask",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord provides UV coordinates to BoxMask input A.",
       "ScalarParameters define the Center, Width, Height, and Hardness.",
@@ -364,8 +1331,8 @@
         "id": "box_hardness",
         "name": "Box Hardness",
         "type": "scalar",
-        "min": 0.0,
-        "max": 1.0,
+        "min": 0,
+        "max": 1,
         "default": 0.9,
         "description": "Edge hardness."
       }
@@ -376,26 +1343,181 @@
     "expectedBehavior": "Width and Height scale the box bounds; Hardness sharpens or softens the edges.",
     "motionPreview": "Solid white box on a black background.",
     "colorPreview": "Solid white box on a black background.",
-    "debugInformation": ["BoxMask output", "Box Width", "Box Height"],
+    "debugInformation": [
+      "BoxMask output",
+      "Box Width",
+      "Box Height"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Opaque"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 150 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_width", "type": "customNode", "position": { "x": 50, "y": 260 }, "data": { "label": "Box Width", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Box Width", "value": 0.3, "min": 0.05, "max": 0.5 } } },
-        { "id": "n_height", "type": "customNode", "position": { "x": 50, "y": 380 }, "data": { "label": "Box Height", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Box Height", "value": 0.3, "min": 0.05, "max": 0.5 } } },
-        { "id": "n_hardness", "type": "customNode", "position": { "x": 50, "y": 500 }, "data": { "label": "Box Hardness", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Box Hardness", "value": 0.9, "min": 0, "max": 1 } } },
-        { "id": "n_bmask", "type": "customNode", "position": { "x": 320, "y": 180 }, "data": { "label": "Box Mask", "nodeType": "BoxMask", "inputs": ["A", "B", "Width", "Height", "Hardness"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 550, "y": 200 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["BaseColor", "Metallic", "Roughness", "EmissiveColor", "Normal"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_width",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 260
+          },
+          "data": {
+            "label": "Box Width",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Box Width",
+              "value": 0.3,
+              "min": 0.05,
+              "max": 0.5
+            }
+          }
+        },
+        {
+          "id": "n_height",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 380
+          },
+          "data": {
+            "label": "Box Height",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Box Height",
+              "value": 0.3,
+              "min": 0.05,
+              "max": 0.5
+            }
+          }
+        },
+        {
+          "id": "n_hardness",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 500
+          },
+          "data": {
+            "label": "Box Hardness",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Box Hardness",
+              "value": 0.9,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_bmask",
+          "type": "customNode",
+          "position": {
+            "x": 320,
+            "y": 180
+          },
+          "data": {
+            "label": "Box Mask",
+            "nodeType": "BoxMask",
+            "inputs": [
+              "A",
+              "B",
+              "Width",
+              "Height",
+              "Hardness"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 550,
+            "y": 200
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "BaseColor",
+              "Metallic",
+              "Roughness",
+              "EmissiveColor",
+              "Normal"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_bmask", "targetHandle": "A" },
-        { "id": "e2", "source": "n_width", "sourceHandle": "Float", "target": "n_bmask", "targetHandle": "Width" },
-        { "id": "e3", "source": "n_height", "sourceHandle": "Float", "target": "n_bmask", "targetHandle": "Height" },
-        { "id": "e4", "source": "n_hardness", "sourceHandle": "Float", "target": "n_bmask", "targetHandle": "Hardness" },
-        { "id": "e5", "source": "n_bmask", "sourceHandle": "Result", "target": "n_out", "targetHandle": "EmissiveColor" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_bmask",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_width",
+          "sourceHandle": "Float",
+          "target": "n_bmask",
+          "targetHandle": "Width"
+        },
+        {
+          "id": "e3",
+          "source": "n_height",
+          "sourceHandle": "Float",
+          "target": "n_bmask",
+          "targetHandle": "Height"
+        },
+        {
+          "id": "e4",
+          "source": "n_hardness",
+          "sourceHandle": "Float",
+          "target": "n_bmask",
+          "targetHandle": "Hardness"
+        },
+        {
+          "id": "e5",
+          "source": "n_bmask",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "EmissiveColor"
+        }
       ]
     }
   },
@@ -406,7 +1528,12 @@
     "moduleName": "conemask",
     "goal": "Generate a directional spotlight/cone (sector) projection shape.",
     "finalVisualResult": "A linear white-to-black sector gradient projecting straight forward from the bottom center.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "ConeMask", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "ConeMask",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord provides UV coordinates to ConeMask input A.",
       "ScalarParameters define the Radius (range) and Angle (spread).",
@@ -419,7 +1546,7 @@
         "name": "Cone Radius",
         "type": "scalar",
         "min": 0.1,
-        "max": 1.0,
+        "max": 1,
         "default": 0.7,
         "description": "Cone projection range."
       },
@@ -439,24 +1566,151 @@
     "expectedBehavior": "Radius controls far reach; Angle controls the wedge spread.",
     "motionPreview": "Linear sector gradient.",
     "colorPreview": "Linear sector gradient.",
-    "debugInformation": ["ConeMask output", "Cone Radius", "Cone Angle"],
+    "debugInformation": [
+      "ConeMask output",
+      "Cone Radius",
+      "Cone Angle"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Opaque"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 150 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_radius", "type": "customNode", "position": { "x": 50, "y": 280 }, "data": { "label": "Cone Radius", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Cone Radius", "value": 0.7, "min": 0.1, "max": 1.0 } } },
-        { "id": "n_angle", "type": "customNode", "position": { "x": 50, "y": 400 }, "data": { "label": "Cone Angle", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Cone Angle", "value": 90, "min": 10, "max": 180 } } },
-        { "id": "n_cmask", "type": "customNode", "position": { "x": 320, "y": 180 }, "data": { "label": "Cone Mask", "nodeType": "ConeMask", "inputs": ["A", "B", "Radius", "Angle"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 550, "y": 200 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["BaseColor", "Metallic", "Roughness", "EmissiveColor", "Normal"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 150
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_radius",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 280
+          },
+          "data": {
+            "label": "Cone Radius",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Cone Radius",
+              "value": 0.7,
+              "min": 0.1,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_angle",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 400
+          },
+          "data": {
+            "label": "Cone Angle",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Cone Angle",
+              "value": 90,
+              "min": 10,
+              "max": 180
+            }
+          }
+        },
+        {
+          "id": "n_cmask",
+          "type": "customNode",
+          "position": {
+            "x": 320,
+            "y": 180
+          },
+          "data": {
+            "label": "Cone Mask",
+            "nodeType": "ConeMask",
+            "inputs": [
+              "A",
+              "B",
+              "Radius",
+              "Angle"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 550,
+            "y": 200
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "BaseColor",
+              "Metallic",
+              "Roughness",
+              "EmissiveColor",
+              "Normal"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_cmask", "targetHandle": "A" },
-        { "id": "e2", "source": "n_radius", "sourceHandle": "Float", "target": "n_cmask", "targetHandle": "Radius" },
-        { "id": "e3", "source": "n_angle", "sourceHandle": "Float", "target": "n_cmask", "targetHandle": "Angle" },
-        { "id": "e4", "source": "n_cmask", "sourceHandle": "Result", "target": "n_out", "targetHandle": "EmissiveColor" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_cmask",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_radius",
+          "sourceHandle": "Float",
+          "target": "n_cmask",
+          "targetHandle": "Radius"
+        },
+        {
+          "id": "e3",
+          "source": "n_angle",
+          "sourceHandle": "Float",
+          "target": "n_cmask",
+          "targetHandle": "Angle"
+        },
+        {
+          "id": "e4",
+          "source": "n_cmask",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "EmissiveColor"
+        }
       ]
     }
   },
@@ -467,7 +1721,16 @@
     "moduleName": "cone-telegraph",
     "goal": "Create a cone-shaped (sector) telegraph warning indicator projecting forward from a boss position.",
     "finalVisualResult": "A glowing orange-red sector/cone telegraph pulsing in intensity.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "ConeMask", "Time", "Sine", "Multiply", "Lerp", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "ConeMask",
+      "Time",
+      "Sine",
+      "Multiply",
+      "Lerp",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord provides UV coordinates to ConeMask input A.",
       "ScalarParameter B defines the origin of the cone (e.g., bottom-center).",
@@ -491,7 +1754,7 @@
         "name": "Cone Radius",
         "type": "scalar",
         "min": 0.1,
-        "max": 1.0,
+        "max": 1,
         "default": 0.7,
         "description": "Far reach radius."
       },
@@ -500,7 +1763,7 @@
         "name": "Pulse Speed",
         "type": "scalar",
         "min": 0.1,
-        "max": 5.0,
+        "max": 5,
         "default": 1.5,
         "description": "Telegraph warning pulse speed."
       }
@@ -511,46 +1774,452 @@
     "expectedBehavior": "A 90-degree sector shooting upward, pulsing in orange-red intensity.",
     "motionPreview": "Pulsing sector mask.",
     "colorPreview": "Pulsing orange-red sector.",
-    "debugInformation": ["ConeMask output", "Pulse value", "Final color"],
+    "debugInformation": [
+      "ConeMask output",
+      "Pulse value",
+      "Final color"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Translucent"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 100 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_radius", "type": "customNode", "position": { "x": 50, "y": 210 }, "data": { "label": "Cone Radius", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Cone Radius", "value": 0.7, "min": 0.1, "max": 1.0 } } },
-        { "id": "n_angle", "type": "customNode", "position": { "x": 50, "y": 320 }, "data": { "label": "Cone Angle", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Cone Angle", "value": 90, "min": 10, "max": 180 } } },
-        { "id": "n_cmask", "type": "customNode", "position": { "x": 280, "y": 150 }, "data": { "label": "Cone Mask", "nodeType": "ConeMask", "inputs": ["A", "B", "Radius", "Angle"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_time", "type": "customNode", "position": { "x": 50, "y": 450 }, "data": { "label": "Time", "nodeType": "Time", "inputs": [], "outputs": ["Time"], "values": {} } },
-        { "id": "n_speed", "type": "customNode", "position": { "x": 50, "y": 560 }, "data": { "label": "Pulse Speed", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Speed", "value": 1.5, "min": 0.1, "max": 5.0 } } },
-        { "id": "n_tmult", "type": "customNode", "position": { "x": 260, "y": 490 }, "data": { "label": "Multiply Speed", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_sine", "type": "customNode", "position": { "x": 420, "y": 490 }, "data": { "label": "Sine", "nodeType": "Sine", "inputs": ["Value"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_pulse_lerp", "type": "customNode", "position": { "x": 560, "y": 450 }, "data": { "label": "Pulse Remap", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_pulse_min", "type": "customNode", "position": { "x": 420, "y": 600 }, "data": { "label": "Pulse Min (0.3)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Min", "value": 0.3, "min": 0, "max": 1 } } },
-        { "id": "n_pulse_max", "type": "customNode", "position": { "x": 420, "y": 710 }, "data": { "label": "Pulse Max (1.0)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Max", "value": 1.0, "min": 0, "max": 1 } } },
-        { "id": "n_combine", "type": "customNode", "position": { "x": 750, "y": 280 }, "data": { "label": "Multiply Mask", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_warn_col", "type": "customNode", "position": { "x": 750, "y": 100 }, "data": { "label": "Warn Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Warn Color", "color": "#ff3000" } } },
-        { "id": "n_floor_col", "type": "customNode", "position": { "x": 750, "y": -10 }, "data": { "label": "Floor Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Floor Color", "color": "#2a3037" } } },
-        { "id": "n_lerp_color", "type": "customNode", "position": { "x": 960, "y": 120 }, "data": { "label": "Lerp Color", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 1150, "y": 150 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["BaseColor", "Metallic", "Roughness", "EmissiveColor", "Normal"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 100
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_radius",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 210
+          },
+          "data": {
+            "label": "Cone Radius",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Cone Radius",
+              "value": 0.7,
+              "min": 0.1,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_angle",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 320
+          },
+          "data": {
+            "label": "Cone Angle",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Cone Angle",
+              "value": 90,
+              "min": 10,
+              "max": 180
+            }
+          }
+        },
+        {
+          "id": "n_cmask",
+          "type": "customNode",
+          "position": {
+            "x": 280,
+            "y": 150
+          },
+          "data": {
+            "label": "Cone Mask",
+            "nodeType": "ConeMask",
+            "inputs": [
+              "A",
+              "B",
+              "Radius",
+              "Angle"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_time",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 450
+          },
+          "data": {
+            "label": "Time",
+            "nodeType": "Time",
+            "inputs": [],
+            "outputs": [
+              "Time"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_speed",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 560
+          },
+          "data": {
+            "label": "Pulse Speed",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Speed",
+              "value": 1.5,
+              "min": 0.1,
+              "max": 5
+            }
+          }
+        },
+        {
+          "id": "n_tmult",
+          "type": "customNode",
+          "position": {
+            "x": 260,
+            "y": 490
+          },
+          "data": {
+            "label": "Multiply Speed",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_sine",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 490
+          },
+          "data": {
+            "label": "Sine",
+            "nodeType": "Sine",
+            "inputs": [
+              "Value"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_pulse_lerp",
+          "type": "customNode",
+          "position": {
+            "x": 560,
+            "y": 450
+          },
+          "data": {
+            "label": "Pulse Remap",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_pulse_min",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 600
+          },
+          "data": {
+            "label": "Pulse Min (0.3)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Min",
+              "value": 0.3,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_pulse_max",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 710
+          },
+          "data": {
+            "label": "Pulse Max (1.0)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Max",
+              "value": 1,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_combine",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 280
+          },
+          "data": {
+            "label": "Multiply Mask",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_warn_col",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 100
+          },
+          "data": {
+            "label": "Warn Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Warn Color",
+              "color": "#ff3000"
+            }
+          }
+        },
+        {
+          "id": "n_floor_col",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": -10
+          },
+          "data": {
+            "label": "Floor Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Floor Color",
+              "color": "#2a3037"
+            }
+          }
+        },
+        {
+          "id": "n_lerp_color",
+          "type": "customNode",
+          "position": {
+            "x": 960,
+            "y": 120
+          },
+          "data": {
+            "label": "Lerp Color",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 1150,
+            "y": 150
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "BaseColor",
+              "Metallic",
+              "Roughness",
+              "EmissiveColor",
+              "Normal"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_cmask", "targetHandle": "A" },
-        { "id": "e2", "source": "n_radius", "sourceHandle": "Float", "target": "n_cmask", "targetHandle": "Radius" },
-        { "id": "e3", "source": "n_angle", "sourceHandle": "Float", "target": "n_cmask", "targetHandle": "Angle" },
-        { "id": "e4", "source": "n_time", "sourceHandle": "Time", "target": "n_tmult", "targetHandle": "A" },
-        { "id": "e5", "source": "n_speed", "sourceHandle": "Float", "target": "n_tmult", "targetHandle": "B" },
-        { "id": "e6", "source": "n_tmult", "sourceHandle": "Result", "target": "n_sine", "targetHandle": "Value" },
-        { "id": "e7", "source": "n_sine", "sourceHandle": "Result", "target": "n_pulse_lerp", "targetHandle": "Alpha" },
-        { "id": "e8", "source": "n_pulse_min", "sourceHandle": "Float", "target": "n_pulse_lerp", "targetHandle": "A" },
-        { "id": "e9", "source": "n_pulse_max", "sourceHandle": "Float", "target": "n_pulse_lerp", "targetHandle": "B" },
-        { "id": "e10", "source": "n_cmask", "sourceHandle": "Result", "target": "n_combine", "targetHandle": "A" },
-        { "id": "e11", "source": "n_pulse_lerp", "sourceHandle": "Result", "target": "n_combine", "targetHandle": "B" },
-        { "id": "e12", "source": "n_floor_col", "sourceHandle": "Color", "target": "n_lerp_color", "targetHandle": "A" },
-        { "id": "e13", "source": "n_warn_col", "sourceHandle": "Color", "target": "n_lerp_color", "targetHandle": "B" },
-        { "id": "e14", "source": "n_combine", "sourceHandle": "Result", "target": "n_lerp_color", "targetHandle": "Alpha" },
-        { "id": "e15", "source": "n_lerp_color", "sourceHandle": "Result", "target": "n_out", "targetHandle": "EmissiveColor" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_cmask",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_radius",
+          "sourceHandle": "Float",
+          "target": "n_cmask",
+          "targetHandle": "Radius"
+        },
+        {
+          "id": "e3",
+          "source": "n_angle",
+          "sourceHandle": "Float",
+          "target": "n_cmask",
+          "targetHandle": "Angle"
+        },
+        {
+          "id": "e4",
+          "source": "n_time",
+          "sourceHandle": "Time",
+          "target": "n_tmult",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e5",
+          "source": "n_speed",
+          "sourceHandle": "Float",
+          "target": "n_tmult",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e6",
+          "source": "n_tmult",
+          "sourceHandle": "Result",
+          "target": "n_sine",
+          "targetHandle": "Value"
+        },
+        {
+          "id": "e7",
+          "source": "n_sine",
+          "sourceHandle": "Result",
+          "target": "n_pulse_lerp",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e8",
+          "source": "n_pulse_min",
+          "sourceHandle": "Float",
+          "target": "n_pulse_lerp",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e9",
+          "source": "n_pulse_max",
+          "sourceHandle": "Float",
+          "target": "n_pulse_lerp",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e10",
+          "source": "n_cmask",
+          "sourceHandle": "Result",
+          "target": "n_combine",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e11",
+          "source": "n_pulse_lerp",
+          "sourceHandle": "Result",
+          "target": "n_combine",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e12",
+          "source": "n_floor_col",
+          "sourceHandle": "Color",
+          "target": "n_lerp_color",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e13",
+          "source": "n_warn_col",
+          "sourceHandle": "Color",
+          "target": "n_lerp_color",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e14",
+          "source": "n_combine",
+          "sourceHandle": "Result",
+          "target": "n_lerp_color",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e15",
+          "source": "n_lerp_color",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "EmissiveColor"
+        }
       ]
     }
   },
@@ -561,7 +2230,16 @@
     "moduleName": "box-telegraph",
     "goal": "Create a rectangular lane telegraph warning indicator (lane AoE) projecting forward from a boss position.",
     "finalVisualResult": "A glowing orange-red rectangular lane telegraph pulsing in intensity.",
-    "requiredNodes": ["TexCoord", "ScalarParameter", "BoxMask", "Time", "Sine", "Multiply", "Lerp", "FinalColor"],
+    "requiredNodes": [
+      "TexCoord",
+      "ScalarParameter",
+      "BoxMask",
+      "Time",
+      "Sine",
+      "Multiply",
+      "Lerp",
+      "FinalColor"
+    ],
     "nodeRelationships": [
       "TexCoord provides UV coordinates to BoxMask input A.",
       "ScalarParameters define Width, Height, and Hardness.",
@@ -594,7 +2272,7 @@
         "name": "Pulse Speed",
         "type": "scalar",
         "min": 0.1,
-        "max": 5.0,
+        "max": 5,
         "default": 1.5,
         "description": "Telegraph warning pulse speed."
       }
@@ -605,48 +2283,1447 @@
     "expectedBehavior": "A rectangular warning lane pulsing in orange-red intensity.",
     "motionPreview": "Pulsing rectangular mask.",
     "colorPreview": "Pulsing orange-red rectangle.",
-    "debugInformation": ["BoxMask output", "Pulse value", "Final color"],
+    "debugInformation": [
+      "BoxMask output",
+      "Pulse value",
+      "Final color"
+    ],
     "materialSettings": {
       "domain": "Surface",
       "blendMode": "Translucent"
     },
     "initialGraph": {
       "nodes": [
-        { "id": "n_uv", "type": "customNode", "position": { "x": 50, "y": 100 }, "data": { "label": "TexCoord", "nodeType": "TexCoord", "inputs": [], "outputs": ["UV"], "values": {} } },
-        { "id": "n_width", "type": "customNode", "position": { "x": 50, "y": 210 }, "data": { "label": "Box Width", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Box Width", "value": 0.15, "min": 0.05, "max": 0.5 } } },
-        { "id": "n_height", "type": "customNode", "position": { "x": 50, "y": 320 }, "data": { "label": "Box Height", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Box Height", "value": 0.4, "min": 0.05, "max": 0.5 } } },
-        { "id": "n_hardness", "type": "customNode", "position": { "x": 50, "y": 430 }, "data": { "label": "Box Hardness", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Box Hardness", "value": 0.95, "min": 0.0, "max": 1.0 } } },
-        { "id": "n_bmask", "type": "customNode", "position": { "x": 280, "y": 150 }, "data": { "label": "Box Mask", "nodeType": "BoxMask", "inputs": ["A", "B", "Width", "Height", "Hardness"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_time", "type": "customNode", "position": { "x": 50, "y": 560 }, "data": { "label": "Time", "nodeType": "Time", "inputs": [], "outputs": ["Time"], "values": {} } },
-        { "id": "n_speed", "type": "customNode", "position": { "x": 50, "y": 670 }, "data": { "label": "Pulse Speed", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Speed", "value": 1.5, "min": 0.1, "max": 5.0 } } },
-        { "id": "n_tmult", "type": "customNode", "position": { "x": 260, "y": 600 }, "data": { "label": "Multiply Speed", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_sine", "type": "customNode", "position": { "x": 420, "y": 600 }, "data": { "label": "Sine", "nodeType": "Sine", "inputs": ["Value"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_pulse_lerp", "type": "customNode", "position": { "x": 560, "y": 560 }, "data": { "label": "Pulse Remap", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_pulse_min", "type": "customNode", "position": { "x": 420, "y": 710 }, "data": { "label": "Pulse Min (0.3)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Min", "value": 0.3, "min": 0, "max": 1 } } },
-        { "id": "n_pulse_max", "type": "customNode", "position": { "x": 420, "y": 820 }, "data": { "label": "Pulse Max (1.0)", "nodeType": "ScalarParameter", "inputs": [], "outputs": ["Float"], "values": { "name": "Pulse Max", "value": 1.0, "min": 0, "max": 1 } } },
-        { "id": "n_combine", "type": "customNode", "position": { "x": 750, "y": 280 }, "data": { "label": "Multiply Mask", "nodeType": "Multiply", "inputs": ["A", "B"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_warn_col", "type": "customNode", "position": { "x": 750, "y": 100 }, "data": { "label": "Warn Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Warn Color", "color": "#ff3000" } } },
-        { "id": "n_floor_col", "type": "customNode", "position": { "x": 750, "y": -10 }, "data": { "label": "Floor Color", "nodeType": "VectorParameter", "inputs": [], "outputs": ["Color"], "values": { "name": "Floor Color", "color": "#2a3037" } } },
-        { "id": "n_lerp_color", "type": "customNode", "position": { "x": 960, "y": 120 }, "data": { "label": "Lerp Color", "nodeType": "Lerp", "inputs": ["A", "B", "Alpha"], "outputs": ["Result"], "values": {} } },
-        { "id": "n_out", "type": "customNode", "position": { "x": 1150, "y": 150 }, "data": { "label": "Final Emissive", "nodeType": "FinalColor", "inputs": ["BaseColor", "Metallic", "Roughness", "EmissiveColor", "Normal"], "outputs": [], "values": {} } }
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 100
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_width",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 210
+          },
+          "data": {
+            "label": "Box Width",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Box Width",
+              "value": 0.15,
+              "min": 0.05,
+              "max": 0.5
+            }
+          }
+        },
+        {
+          "id": "n_height",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 320
+          },
+          "data": {
+            "label": "Box Height",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Box Height",
+              "value": 0.4,
+              "min": 0.05,
+              "max": 0.5
+            }
+          }
+        },
+        {
+          "id": "n_hardness",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 430
+          },
+          "data": {
+            "label": "Box Hardness",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Box Hardness",
+              "value": 0.95,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_bmask",
+          "type": "customNode",
+          "position": {
+            "x": 280,
+            "y": 150
+          },
+          "data": {
+            "label": "Box Mask",
+            "nodeType": "BoxMask",
+            "inputs": [
+              "A",
+              "B",
+              "Width",
+              "Height",
+              "Hardness"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_time",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 560
+          },
+          "data": {
+            "label": "Time",
+            "nodeType": "Time",
+            "inputs": [],
+            "outputs": [
+              "Time"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_speed",
+          "type": "customNode",
+          "position": {
+            "x": 50,
+            "y": 670
+          },
+          "data": {
+            "label": "Pulse Speed",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Speed",
+              "value": 1.5,
+              "min": 0.1,
+              "max": 5
+            }
+          }
+        },
+        {
+          "id": "n_tmult",
+          "type": "customNode",
+          "position": {
+            "x": 260,
+            "y": 600
+          },
+          "data": {
+            "label": "Multiply Speed",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_sine",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 600
+          },
+          "data": {
+            "label": "Sine",
+            "nodeType": "Sine",
+            "inputs": [
+              "Value"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_pulse_lerp",
+          "type": "customNode",
+          "position": {
+            "x": 560,
+            "y": 560
+          },
+          "data": {
+            "label": "Pulse Remap",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_pulse_min",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 710
+          },
+          "data": {
+            "label": "Pulse Min (0.3)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Min",
+              "value": 0.3,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_pulse_max",
+          "type": "customNode",
+          "position": {
+            "x": 420,
+            "y": 820
+          },
+          "data": {
+            "label": "Pulse Max (1.0)",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Pulse Max",
+              "value": 1,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_combine",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 280
+          },
+          "data": {
+            "label": "Multiply Mask",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_warn_col",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 100
+          },
+          "data": {
+            "label": "Warn Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Warn Color",
+              "color": "#ff3000"
+            }
+          }
+        },
+        {
+          "id": "n_floor_col",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": -10
+          },
+          "data": {
+            "label": "Floor Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Floor Color",
+              "color": "#2a3037"
+            }
+          }
+        },
+        {
+          "id": "n_lerp_color",
+          "type": "customNode",
+          "position": {
+            "x": 960,
+            "y": 120
+          },
+          "data": {
+            "label": "Lerp Color",
+            "nodeType": "Lerp",
+            "inputs": [
+              "A",
+              "B",
+              "Alpha"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 1150,
+            "y": 150
+          },
+          "data": {
+            "label": "Final Emissive",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "BaseColor",
+              "Metallic",
+              "Roughness",
+              "EmissiveColor",
+              "Normal"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
       ],
       "edges": [
-        { "id": "e1", "source": "n_uv", "sourceHandle": "UV", "target": "n_bmask", "targetHandle": "A" },
-        { "id": "e2", "source": "n_width", "sourceHandle": "Float", "target": "n_bmask", "targetHandle": "Width" },
-        { "id": "e3", "source": "n_height", "sourceHandle": "Float", "target": "n_bmask", "targetHandle": "Height" },
-        { "id": "e4", "source": "n_hardness", "sourceHandle": "Float", "target": "n_bmask", "targetHandle": "Hardness" },
-        { "id": "e5", "source": "n_time", "sourceHandle": "Time", "target": "n_tmult", "targetHandle": "A" },
-        { "id": "e6", "source": "n_speed", "sourceHandle": "Float", "target": "n_tmult", "targetHandle": "B" },
-        { "id": "e7", "source": "n_tmult", "sourceHandle": "Result", "target": "n_sine", "targetHandle": "Value" },
-        { "id": "e8", "source": "n_sine", "sourceHandle": "Result", "target": "n_pulse_lerp", "targetHandle": "Alpha" },
-        { "id": "e9", "source": "n_pulse_min", "sourceHandle": "Float", "target": "n_pulse_lerp", "targetHandle": "A" },
-        { "id": "e10", "source": "n_pulse_max", "sourceHandle": "Float", "target": "n_pulse_lerp", "targetHandle": "B" },
-        { "id": "e11", "source": "n_bmask", "sourceHandle": "Result", "target": "n_combine", "targetHandle": "A" },
-        { "id": "e12", "source": "n_pulse_lerp", "sourceHandle": "Result", "target": "n_combine", "targetHandle": "B" },
-        { "id": "e13", "source": "n_floor_col", "sourceHandle": "Color", "target": "n_lerp_color", "targetHandle": "A" },
-        { "id": "e14", "source": "n_warn_col", "sourceHandle": "Color", "target": "n_lerp_color", "targetHandle": "B" },
-        { "id": "e15", "source": "n_combine", "sourceHandle": "Result", "target": "n_lerp_color", "targetHandle": "Alpha" },
-        { "id": "e16", "source": "n_lerp_color", "sourceHandle": "Result", "target": "n_out", "targetHandle": "EmissiveColor" }
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_bmask",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e2",
+          "source": "n_width",
+          "sourceHandle": "Float",
+          "target": "n_bmask",
+          "targetHandle": "Width"
+        },
+        {
+          "id": "e3",
+          "source": "n_height",
+          "sourceHandle": "Float",
+          "target": "n_bmask",
+          "targetHandle": "Height"
+        },
+        {
+          "id": "e4",
+          "source": "n_hardness",
+          "sourceHandle": "Float",
+          "target": "n_bmask",
+          "targetHandle": "Hardness"
+        },
+        {
+          "id": "e5",
+          "source": "n_time",
+          "sourceHandle": "Time",
+          "target": "n_tmult",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e6",
+          "source": "n_speed",
+          "sourceHandle": "Float",
+          "target": "n_tmult",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e7",
+          "source": "n_tmult",
+          "sourceHandle": "Result",
+          "target": "n_sine",
+          "targetHandle": "Value"
+        },
+        {
+          "id": "e8",
+          "source": "n_sine",
+          "sourceHandle": "Result",
+          "target": "n_pulse_lerp",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e9",
+          "source": "n_pulse_min",
+          "sourceHandle": "Float",
+          "target": "n_pulse_lerp",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e10",
+          "source": "n_pulse_max",
+          "sourceHandle": "Float",
+          "target": "n_pulse_lerp",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e11",
+          "source": "n_bmask",
+          "sourceHandle": "Result",
+          "target": "n_combine",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e12",
+          "source": "n_pulse_lerp",
+          "sourceHandle": "Result",
+          "target": "n_combine",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e13",
+          "source": "n_floor_col",
+          "sourceHandle": "Color",
+          "target": "n_lerp_color",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e14",
+          "source": "n_warn_col",
+          "sourceHandle": "Color",
+          "target": "n_lerp_color",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e15",
+          "source": "n_combine",
+          "sourceHandle": "Result",
+          "target": "n_lerp_color",
+          "targetHandle": "Alpha"
+        },
+        {
+          "id": "e16",
+          "source": "n_lerp_color",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "EmissiveColor"
+        }
+      ]
+    }
+  },
+  {
+    "id": "liquid-gauge",
+    "name": "Liquid Gauge",
+    "category": "Advanced",
+    "moduleName": "liquid-gauge",
+    "goal": "Create a dynamic liquid gauge or hunger bar using waving sine math and a step function.",
+    "finalVisualResult": "A yellow liquid that waves and fills up a circular container based on a percentage.",
+    "requiredNodes": [
+      "TexCoord",
+      "ComponentMask",
+      "OneMinus",
+      "Time",
+      "Sine",
+      "Step",
+      "RadialGradientExponential",
+      "Add",
+      "Multiply",
+      "FinalColor"
+    ],
+    "nodeRelationships": [
+      "TexCoord is split into horizontal (R) and vertical (G).",
+      "Time creates two scrolling sine waves with different speeds and amplitudes.",
+      "The Step node creates a sharp surface level based on the Percent parameter.",
+      "RadialGradient is used as a container mask."
+    ],
+    "requiredParameters": [
+      {
+        "id": "percent",
+        "name": "Percent",
+        "type": "scalar",
+        "min": 0,
+        "max": 1,
+        "default": 0.5,
+        "description": "Fill level of the liquid."
+      }
+    ],
+    "commonMistakes": [
+      "Swapping the X and Y inputs of the Step node, causing the liquid to render upside down."
+    ],
+    "expectedBehavior": "Liquid waves horizontally and its height is controlled by the Percent slider.",
+    "motionPreview": "Waving liquid mask.",
+    "colorPreview": "Yellow waving liquid in a circle.",
+    "debugInformation": [
+      "Combined waves",
+      "Step output"
+    ],
+    "materialSettings": {
+      "domain": "Surface",
+      "blendMode": "Translucent"
+    },
+    "initialGraph": {
+      "nodes": [
+        {
+          "id": "n_uv",
+          "type": "customNode",
+          "position": {
+            "x": 0,
+            "y": 300
+          },
+          "data": {
+            "label": "TexCoord",
+            "nodeType": "TexCoord",
+            "inputs": [],
+            "outputs": [
+              "UV"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_maskG",
+          "type": "customNode",
+          "position": {
+            "x": 150,
+            "y": 150
+          },
+          "data": {
+            "label": "Mask ( G )",
+            "nodeType": "ComponentMask",
+            "inputs": [
+              "Input"
+            ],
+            "outputs": [
+              "Masked Value"
+            ],
+            "values": {
+              "maskG": true
+            }
+          }
+        },
+        {
+          "id": "n_1minus",
+          "type": "customNode",
+          "position": {
+            "x": 300,
+            "y": 150
+          },
+          "data": {
+            "label": "1-x",
+            "nodeType": "OneMinus",
+            "inputs": [
+              "Input"
+            ],
+            "outputs": [
+              "1 - Input"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_maskR",
+          "type": "customNode",
+          "position": {
+            "x": 150,
+            "y": 400
+          },
+          "data": {
+            "label": "Mask ( R )",
+            "nodeType": "ComponentMask",
+            "inputs": [
+              "Input"
+            ],
+            "outputs": [
+              "Masked Value"
+            ],
+            "values": {
+              "maskR": true
+            }
+          }
+        },
+        {
+          "id": "n_time",
+          "type": "customNode",
+          "position": {
+            "x": -50,
+            "y": 500
+          },
+          "data": {
+            "label": "Time",
+            "nodeType": "Time",
+            "inputs": [],
+            "outputs": [
+              "Time"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_t_mul1",
+          "type": "customNode",
+          "position": {
+            "x": 150,
+            "y": 500
+          },
+          "data": {
+            "label": "Multiply (0.5)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_05",
+          "type": "customNode",
+          "position": {
+            "x": 0,
+            "y": 600
+          },
+          "data": {
+            "label": "0.5",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 0.5
+            }
+          }
+        },
+        {
+          "id": "n_t_mul2",
+          "type": "customNode",
+          "position": {
+            "x": 150,
+            "y": 650
+          },
+          "data": {
+            "label": "Multiply (0.8)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_08",
+          "type": "customNode",
+          "position": {
+            "x": 0,
+            "y": 750
+          },
+          "data": {
+            "label": "0.8",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 0.8
+            }
+          }
+        },
+        {
+          "id": "n_add1",
+          "type": "customNode",
+          "position": {
+            "x": 300,
+            "y": 450
+          },
+          "data": {
+            "label": "Add",
+            "nodeType": "Add",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_sin1",
+          "type": "customNode",
+          "position": {
+            "x": 450,
+            "y": 450
+          },
+          "data": {
+            "label": "Sine",
+            "nodeType": "Sine",
+            "inputs": [
+              "Value"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_s_mul1",
+          "type": "customNode",
+          "position": {
+            "x": 600,
+            "y": 450
+          },
+          "data": {
+            "label": "Multiply (0.08)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_008",
+          "type": "customNode",
+          "position": {
+            "x": 450,
+            "y": 550
+          },
+          "data": {
+            "label": "0.08",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 0.08
+            }
+          }
+        },
+        {
+          "id": "n_add2",
+          "type": "customNode",
+          "position": {
+            "x": 300,
+            "y": 600
+          },
+          "data": {
+            "label": "Add",
+            "nodeType": "Add",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_sin2",
+          "type": "customNode",
+          "position": {
+            "x": 450,
+            "y": 600
+          },
+          "data": {
+            "label": "Sine",
+            "nodeType": "Sine",
+            "inputs": [
+              "Value"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_s_mul2",
+          "type": "customNode",
+          "position": {
+            "x": 600,
+            "y": 600
+          },
+          "data": {
+            "label": "Multiply (0.05)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_005",
+          "type": "customNode",
+          "position": {
+            "x": 450,
+            "y": 700
+          },
+          "data": {
+            "label": "0.05",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 0.05
+            }
+          }
+        },
+        {
+          "id": "n_back_add",
+          "type": "customNode",
+          "position": {
+            "x": 800,
+            "y": 200
+          },
+          "data": {
+            "label": "Add (Back)",
+            "nodeType": "Add",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_percent",
+          "type": "customNode",
+          "position": {
+            "x": 750,
+            "y": 400
+          },
+          "data": {
+            "label": "Percent",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "name": "Percent",
+              "value": 0.5,
+              "min": 0,
+              "max": 1
+            }
+          }
+        },
+        {
+          "id": "n_back_step",
+          "type": "customNode",
+          "position": {
+            "x": 950,
+            "y": 250
+          },
+          "data": {
+            "label": "Step",
+            "nodeType": "Step",
+            "inputs": [
+              "Y",
+              "X"
+            ],
+            "outputs": [
+              "0 or 1"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_back_mul",
+          "type": "customNode",
+          "position": {
+            "x": 1100,
+            "y": 250
+          },
+          "data": {
+            "label": "Multiply (0.3)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_03",
+          "type": "customNode",
+          "position": {
+            "x": 950,
+            "y": 350
+          },
+          "data": {
+            "label": "0.3",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "id": "n_front_add",
+          "type": "customNode",
+          "position": {
+            "x": 800,
+            "y": 550
+          },
+          "data": {
+            "label": "Add (Front)",
+            "nodeType": "Add",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_front_step",
+          "type": "customNode",
+          "position": {
+            "x": 950,
+            "y": 550
+          },
+          "data": {
+            "label": "Step",
+            "nodeType": "Step",
+            "inputs": [
+              "Y",
+              "X"
+            ],
+            "outputs": [
+              "0 or 1"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_front_mul",
+          "type": "customNode",
+          "position": {
+            "x": 1100,
+            "y": 550
+          },
+          "data": {
+            "label": "Multiply (1.0)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_10",
+          "type": "customNode",
+          "position": {
+            "x": 950,
+            "y": 650
+          },
+          "data": {
+            "label": "1.0",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 1
+            }
+          }
+        },
+        {
+          "id": "n_combine_waves",
+          "type": "customNode",
+          "position": {
+            "x": 1250,
+            "y": 400
+          },
+          "data": {
+            "label": "Add (Combine)",
+            "nodeType": "Add",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "val_100",
+          "type": "customNode",
+          "position": {
+            "x": 1000,
+            "y": 850
+          },
+          "data": {
+            "label": "100",
+            "nodeType": "ScalarParameter",
+            "inputs": [],
+            "outputs": [
+              "Float"
+            ],
+            "values": {
+              "value": 100
+            }
+          }
+        },
+        {
+          "id": "n_shape",
+          "type": "customNode",
+          "position": {
+            "x": 1200,
+            "y": 800
+          },
+          "data": {
+            "label": "Radial Gradient",
+            "nodeType": "RadialGradientExponential",
+            "inputs": [
+              "UVs",
+              "CenterPosition",
+              "Radius",
+              "Density",
+              "Invert Density"
+            ],
+            "outputs": [
+              "Gradient"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_mask_apply",
+          "type": "customNode",
+          "position": {
+            "x": 1450,
+            "y": 550
+          },
+          "data": {
+            "label": "Multiply (Mask)",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_color",
+          "type": "customNode",
+          "position": {
+            "x": 1450,
+            "y": 150
+          },
+          "data": {
+            "label": "Color",
+            "nodeType": "VectorParameter",
+            "inputs": [],
+            "outputs": [
+              "Color"
+            ],
+            "values": {
+              "name": "Color2",
+              "color": "#fce303"
+            }
+          }
+        },
+        {
+          "id": "n_final_mul",
+          "type": "customNode",
+          "position": {
+            "x": 1650,
+            "y": 350
+          },
+          "data": {
+            "label": "Multiply Color",
+            "nodeType": "Multiply",
+            "inputs": [
+              "A",
+              "B"
+            ],
+            "outputs": [
+              "Result"
+            ],
+            "values": {}
+          }
+        },
+        {
+          "id": "n_out",
+          "type": "customNode",
+          "position": {
+            "x": 1850,
+            "y": 350
+          },
+          "data": {
+            "label": "Final Color",
+            "nodeType": "FinalColor",
+            "inputs": [
+              "Color",
+              "Opacity"
+            ],
+            "outputs": [],
+            "values": {}
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_maskG",
+          "targetHandle": "Input"
+        },
+        {
+          "id": "e2",
+          "source": "n_maskG",
+          "sourceHandle": "Masked Value",
+          "target": "n_1minus",
+          "targetHandle": "Input"
+        },
+        {
+          "id": "e3",
+          "source": "n_uv",
+          "sourceHandle": "UV",
+          "target": "n_maskR",
+          "targetHandle": "Input"
+        },
+        {
+          "id": "e4",
+          "source": "n_time",
+          "sourceHandle": "Time",
+          "target": "n_t_mul1",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e5",
+          "source": "val_05",
+          "sourceHandle": "Float",
+          "target": "n_t_mul1",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e6",
+          "source": "n_time",
+          "sourceHandle": "Time",
+          "target": "n_t_mul2",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e7",
+          "source": "val_08",
+          "sourceHandle": "Float",
+          "target": "n_t_mul2",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e8",
+          "source": "n_maskR",
+          "sourceHandle": "Masked Value",
+          "target": "n_add1",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e9",
+          "source": "n_t_mul1",
+          "sourceHandle": "Result",
+          "target": "n_add1",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e10",
+          "source": "n_add1",
+          "sourceHandle": "Result",
+          "target": "n_sin1",
+          "targetHandle": "Value"
+        },
+        {
+          "id": "e11",
+          "source": "n_sin1",
+          "sourceHandle": "Result",
+          "target": "n_s_mul1",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e12",
+          "source": "val_008",
+          "sourceHandle": "Float",
+          "target": "n_s_mul1",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e13",
+          "source": "n_maskR",
+          "sourceHandle": "Masked Value",
+          "target": "n_add2",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e14",
+          "source": "n_t_mul2",
+          "sourceHandle": "Result",
+          "target": "n_add2",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e15",
+          "source": "n_add2",
+          "sourceHandle": "Result",
+          "target": "n_sin2",
+          "targetHandle": "Value"
+        },
+        {
+          "id": "e16",
+          "source": "n_sin2",
+          "sourceHandle": "Result",
+          "target": "n_s_mul2",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e17",
+          "source": "val_005",
+          "sourceHandle": "Float",
+          "target": "n_s_mul2",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e18",
+          "source": "n_1minus",
+          "sourceHandle": "1 - Input",
+          "target": "n_back_add",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e19",
+          "source": "n_s_mul1",
+          "sourceHandle": "Result",
+          "target": "n_back_add",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e20",
+          "source": "n_back_add",
+          "sourceHandle": "Result",
+          "target": "n_back_step",
+          "targetHandle": "Y"
+        },
+        {
+          "id": "e21",
+          "source": "n_percent",
+          "sourceHandle": "Float",
+          "target": "n_back_step",
+          "targetHandle": "X"
+        },
+        {
+          "id": "e22",
+          "source": "n_back_step",
+          "sourceHandle": "0 or 1",
+          "target": "n_back_mul",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e23",
+          "source": "val_03",
+          "sourceHandle": "Float",
+          "target": "n_back_mul",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e24",
+          "source": "n_1minus",
+          "sourceHandle": "1 - Input",
+          "target": "n_front_add",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e25",
+          "source": "n_s_mul2",
+          "sourceHandle": "Result",
+          "target": "n_front_add",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e26",
+          "source": "n_front_add",
+          "sourceHandle": "Result",
+          "target": "n_front_step",
+          "targetHandle": "Y"
+        },
+        {
+          "id": "e27",
+          "source": "n_percent",
+          "sourceHandle": "Float",
+          "target": "n_front_step",
+          "targetHandle": "X"
+        },
+        {
+          "id": "e28",
+          "source": "n_front_step",
+          "sourceHandle": "0 or 1",
+          "target": "n_front_mul",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e29",
+          "source": "val_10",
+          "sourceHandle": "Float",
+          "target": "n_front_mul",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e30",
+          "source": "n_back_mul",
+          "sourceHandle": "Result",
+          "target": "n_combine_waves",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e31",
+          "source": "n_front_mul",
+          "sourceHandle": "Result",
+          "target": "n_combine_waves",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e32",
+          "source": "val_100",
+          "sourceHandle": "Float",
+          "target": "n_shape",
+          "targetHandle": "Density"
+        },
+        {
+          "id": "e33",
+          "source": "n_combine_waves",
+          "sourceHandle": "Result",
+          "target": "n_mask_apply",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e34",
+          "source": "n_shape",
+          "sourceHandle": "Gradient",
+          "target": "n_mask_apply",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e35",
+          "source": "n_color",
+          "sourceHandle": "Color",
+          "target": "n_final_mul",
+          "targetHandle": "A"
+        },
+        {
+          "id": "e36",
+          "source": "n_mask_apply",
+          "sourceHandle": "Result",
+          "target": "n_final_mul",
+          "targetHandle": "B"
+        },
+        {
+          "id": "e37",
+          "source": "n_final_mul",
+          "sourceHandle": "Result",
+          "target": "n_out",
+          "targetHandle": "Color"
+        }
       ]
     }
   }
